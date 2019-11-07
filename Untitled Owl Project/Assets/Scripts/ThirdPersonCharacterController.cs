@@ -2,43 +2,72 @@
 
 public class ThirdPersonCharacterController : MonoBehaviour
 {
-
-    public float Speed;
+    
+    public float initialVelocity = 0.0f;
+    public float maxVelocity = 10.0f;
+    public float currentVelocity;
+    public float accelerationRate = 1.0f;
+    public float decelerationRate = 3.0f;
     public float Clockwise = 5.00f;
     public float aClockwise = -5.00f;
-
+    public Rigidbody rb;
 
 
     void Start()
     {
 
+
     }
 
-
-    void Update()
+    void FixedUpdate()
     {
         OwlMovement();
-        transform.Translate(0, -0.04f ,0);
+       
 
     }
 
     void OwlMovement()
     {
-        //Movement for going forward and backward for the Owl
 
-        float Horizontal = Input.GetAxis("Horizontal") * -1.0f;
-        float Vertical = Input.GetAxis("Vertical") * -1.0f;
-       
-        Vector3 playerMovement = new Vector3(Horizontal, 0f, Vertical) * Speed * Time.deltaTime;
 
-        transform.Translate(playerMovement, Space.Self);
+        if (Input.GetKey("w"))
+        {
+            rb.AddRelativeForce(0, 0, currentVelocity * Time.deltaTime * -1, ForceMode.VelocityChange);
+
+
+            //This is an increment 
+            currentVelocity = currentVelocity + (accelerationRate * Time.deltaTime);
+        
+        }
+
+        else
+                 {
+            //subtract from the current velocity while decelerating
+                      currentVelocity = currentVelocity - (decelerationRate * Time.deltaTime);
+                  }
+
+
+            currentVelocity = Mathf.Clamp(currentVelocity, initialVelocity, maxVelocity);
+
+    //    if (Input.GetKey("s"))
+ //       {
+ //           rb.AddRelativeForce(0, 0, initialVelocity * Time.deltaTime * -1, ForceMode.VelocityChange);
+
+      //      if (initialVelocity < maxVelocity)
+    //        {
+    //            initialVelocity += 1;
+
+
+    //        }
+    
+    //    }
 
 
         //How to elevate the owl
 
-        if(Input.GetKey("space"))
+        if (Input.GetKey("space"))
         {
-            transform.Translate(0, 0.4f, 0);
+            rb.AddRelativeForce(0, 20f * Time.deltaTime, 0, ForceMode.VelocityChange);
 
         }
 
@@ -54,10 +83,9 @@ public class ThirdPersonCharacterController : MonoBehaviour
             transform.Rotate(0, Time.deltaTime * aClockwise, 0);
 
         }
-
-
         
 
     }
 
-}
+    }
+ 
