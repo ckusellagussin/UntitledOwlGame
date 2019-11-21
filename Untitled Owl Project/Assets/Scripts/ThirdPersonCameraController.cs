@@ -10,14 +10,20 @@ public class ThirdPersonCameraController : MonoBehaviour
     public Transform targetArea, Owl;
     public float smoothSpeed = 0.125f;
     float xMov, yMov;
+    float smoothRotation = 0.1f;
+    Vector3 smoothRotationSpeed;
+    Vector3 currentRotation;
+    Transform camera;
 
     void Start()
     {
-
+        //Gets rid of cursor in-game
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        camera = Camera.main.transform;
 
-        targetArea = this.transform.parent;
+
+        
         Owl = targetArea.transform.parent;
 
     }
@@ -40,7 +46,9 @@ public class ThirdPersonCameraController : MonoBehaviour
         yMov -= Input.GetAxis("yMov") * rotationSpeed;
 
 
-        //Prevents camera from gliding away from player too much
+
+
+        //Prevents camera from overlapping below or higher than owl
         yMov = Mathf.Clamp(yMov, -30, 50);
 
         //Keep Camera focused on the target area
@@ -49,6 +57,7 @@ public class ThirdPersonCameraController : MonoBehaviour
         //The player will rotate only if right mouse button is held
         if(Input.GetMouseButtonDown(1))
         {
+             
             targetArea.rotation = Quaternion.Euler(yMov, xMov, 0);
             Owl.rotation = Quaternion.Euler(0, xMov, 0);
         }
@@ -61,6 +70,9 @@ public class ThirdPersonCameraController : MonoBehaviour
 
         }
 
+        //Experimental 1st Person Camera
+       // currentRotation = Vector3.SmoothDamp(currentRotation,new Vector3 (yMov, xMov, 0), ref smoothRotationSpeed, smoothRotation);
+        //transform.eulerAngles = currentRotation;
 
     }
 
