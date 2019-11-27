@@ -38,7 +38,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
          if (Input.GetKey("w"))
           {
-               rb.AddRelativeForce(0, 0, currentVelocity * Time.deltaTime * -1, ForceMode.VelocityChange);
+               rb.AddRelativeForce(0, 0, currentVelocity * Time.deltaTime, ForceMode.VelocityChange);
 
 
         //This is an increment for the Acceleration
