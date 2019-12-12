@@ -12,6 +12,8 @@ public class ThirdPersonCharacterController : MonoBehaviour
     public float decelerationRate = 3.0f;
     public float Clockwise = 5.00f;
     public float aClockwise = -5.00f;
+    public float elevate = 15.00f;
+    
     public Rigidbody rb;
 
     Transform cameraTransform;
@@ -84,7 +86,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
         if (Input.GetKey("space"))
             {
-                rb.AddRelativeForce(0, 20f * Time.deltaTime, 0, ForceMode.VelocityChange);
+                rb.AddRelativeForce(0, elevate * Time.deltaTime, 0, ForceMode.VelocityChange);
 
             }
 
