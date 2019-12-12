@@ -7,12 +7,15 @@ public class ThirdPersonCameraController : MonoBehaviour
     // Start is called before the first frame update
 
     public float rotationSpeed = 1;
-    public Transform targetArea, Owl;
     public float smoothSpeed = 0.125f;
+
+    public Transform targetArea, Owl;
+
     float xMov, yMov;
-    float smoothRotation = 0.1f;
+
     Vector3 smoothRotationSpeed;
     Vector3 currentRotation;
+
     Transform camera;
 
     void Start()
