@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class ThirdPersonCharacterController : MonoBehaviour
 {
@@ -13,10 +15,14 @@ public class ThirdPersonCharacterController : MonoBehaviour
     public float Clockwise = 5.00f;
     public float aClockwise = -5.00f;
     public float elevate = 15.00f;
-    
+
+    private bool notStunned = true;
+    private bool corRunning = false;
+
     public Rigidbody rb;
 
     Transform cameraTransform;
+
     
 
 
@@ -36,23 +42,25 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
     void OwlMovement()
     {
-    
 
-         if (Input.GetKey("w"))
-          {
-               rb.AddRelativeForce(0, 0, currentVelocity * Time.deltaTime, ForceMode.VelocityChange);
+        if (notStunned == true)
+        {
+
+            if (Input.GetKey("w"))
+            {
+                rb.AddRelativeForce(0, 0, currentVelocity * Time.deltaTime, ForceMode.VelocityChange);
 
 
-        //This is an increment for the Acceleration
-              currentVelocity = currentVelocity + (accelerationRate * Time.deltaTime);
+                //This is an increment for the Acceleration
+                currentVelocity = currentVelocity + (accelerationRate * Time.deltaTime);
 
             }
-        
-           else
-        {
-                   //subtract from the current velocity while decelerating
-                             currentVelocity = currentVelocity - (decelerationRate * Time.deltaTime);
-                          }
+
+            else
+            {
+                //subtract from the current velocity while decelerating
+                currentVelocity = currentVelocity - (decelerationRate * Time.deltaTime);
+            }
 
 
             currentVelocity = Mathf.Clamp(currentVelocity, initialVelocity, maxVelocity);
@@ -71,20 +79,20 @@ public class ThirdPersonCharacterController : MonoBehaviour
             }
 
 
-            if(Input.GetKey(KeyCode.Mouse1))
-        {
+            if (Input.GetKey(KeyCode.Mouse1))
+            {
 
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,
-                       Camera.main.transform.localEulerAngles.y, transform.localEulerAngles.z);
-
-
-        }
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,
+                           Camera.main.transform.localEulerAngles.y, transform.localEulerAngles.z);
 
 
+            }
 
-        //How to elevate the owl
 
-        if (Input.GetKey("space"))
+
+            //How to elevate the owl
+
+            if (Input.GetKey("space"))
             {
                 rb.AddRelativeForce(0, elevate * Time.deltaTime, 0, ForceMode.VelocityChange);
 
@@ -103,8 +111,37 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
             }
 
+        }
+
+
+
+    }
+
+    //This is implemented for when you have been stunned
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Tree")
+        {
+            Debug.Log("You have hit a tree");
+            if (corRunning) StopCoroutine("movementBack");
+            notStunned = false;
+            rb.velocity = Vector3.zero;
+            StartCoroutine("movementBack");
 
         }
     }
+
+    IEnumerator movementBack()
+    {
+        corRunning = true;
+        yield return new WaitForSeconds(3);
+        notStunned = true;
+        corRunning = false;
+
+    }
+      
+
+}
    
  
