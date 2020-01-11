@@ -15,14 +15,11 @@ public class ThirdPersonCharacterController : MonoBehaviour
     public float Clockwise = 5.00f;
     public float aClockwise = -5.00f;
     public float elevate = 15.00f;
-<<<<<<< HEAD
 
     private bool notStunned = true;
     private bool corRunning = false;
 
-=======
-    
->>>>>>> master
+
     public Rigidbody rb;
 
     Transform cameraTransform;
