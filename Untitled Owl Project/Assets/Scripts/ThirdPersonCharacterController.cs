@@ -131,6 +131,16 @@ public class ThirdPersonCharacterController : MonoBehaviour
             StartCoroutine("movementBack");
 
         }
+
+        if (collision.gameObject.tag =="Branch")
+        {
+            Debug.Log("You have hit a branch");
+            if (corRunning) StopCoroutine("movementBackB");
+            notStunned = false;
+            rb.velocity = Vector3.zero;
+            StartCoroutine("movementBackB");
+        }
+
     }
 
     IEnumerator movementBack()
@@ -141,6 +151,19 @@ public class ThirdPersonCharacterController : MonoBehaviour
         corRunning = false;
 
     }
+
+    IEnumerator movementBackB()
+    {
+        corRunning = true;
+        yield return new WaitForSeconds(1);
+        notStunned = true;
+        corRunning = false;
+
+
+    }
+
+
+
       
 
 }
