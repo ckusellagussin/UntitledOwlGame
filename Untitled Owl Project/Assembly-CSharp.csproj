@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AdvancedThirdPersonCamera.cs" />
+    <Compile Include="Assets\Scripts\Energy_System.cs" />
     <Compile Include="Assets\Scripts\ThirdPersonCameraController.cs" />
     <Compile Include="Assets\Scripts\ThirdPersonCharacterController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">

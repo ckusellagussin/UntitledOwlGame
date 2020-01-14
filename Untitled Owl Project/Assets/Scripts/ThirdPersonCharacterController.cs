@@ -19,6 +19,8 @@ public class ThirdPersonCharacterController : MonoBehaviour
     private bool notStunned = true;
     private bool corRunning = false;
 
+    Energy_System energySystem;
+
 
     public Rigidbody rb;
 
@@ -31,12 +33,15 @@ public class ThirdPersonCharacterController : MonoBehaviour
     void Start()
     {
         cameraTransform = Camera.main.transform;
-
+        energySystem = GetComponent<Energy_System>();
     }
+
+    
 
     void FixedUpdate()
     {
         OwlMovement();
+
        
 
     }
@@ -44,16 +49,29 @@ public class ThirdPersonCharacterController : MonoBehaviour
     void OwlMovement()
     {
 
+        if (energySystem.startEnergy <= 0)
+        {
+            return;
+        }
+
         if (notStunned == true)
         {
+          
 
-            if (Input.GetKey("w"))
+            
+
+        
+
+        if (Input.GetKey("w"))
             {
                 rb.AddRelativeForce(0, 0, currentVelocity * Time.deltaTime, ForceMode.VelocityChange);
 
 
                 //This is an increment for the Acceleration
                 currentVelocity = currentVelocity + (accelerationRate * Time.deltaTime);
+
+                energySystem.energyConsumeRate = currentVelocity * 0.1f;
+                energySystem.reduceEnergy();
 
             }
 
@@ -97,6 +115,9 @@ public class ThirdPersonCharacterController : MonoBehaviour
             {
                 rb.AddRelativeForce(0, elevate * Time.deltaTime, 0, ForceMode.VelocityChange);
 
+                energySystem.energyConsumeRate = elevate * 0.1f;
+                energySystem.reduceEnergy();
+
             }
 
             //Rotation for the Owl
@@ -117,6 +138,8 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
 
     }
+
+
 
     //This is implemented for when you have been stunned
 
@@ -140,6 +163,9 @@ public class ThirdPersonCharacterController : MonoBehaviour
             rb.velocity = Vector3.zero;
             StartCoroutine("movementBackB");
         }
+
+  
+
 
     }
 
