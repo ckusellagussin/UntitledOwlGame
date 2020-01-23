@@ -32,6 +32,8 @@ public class Energy_System : MonoBehaviour
 
     public void reduceEnergy()
     {
+        //Energy is depleted at a fixed rate
+
         startEnergy -= Time.deltaTime * energyConsumeRate;
         UpdateUI();
 
@@ -41,7 +43,7 @@ public class Energy_System : MonoBehaviour
     // Update is called once per frame
     void UpdateUI()
     {
-       
+       //Output energy reading to the ui in game
         energyIndicatorText.text = "Energy left: " + startEnergy.ToString("0") + "%";
 
 
@@ -56,6 +58,7 @@ public class Energy_System : MonoBehaviour
 
     }
 
+    //If Owl hits any object with these tags then recover energy at the chosen rate
     void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Nest"))

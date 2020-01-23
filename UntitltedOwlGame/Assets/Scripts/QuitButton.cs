@@ -5,6 +5,8 @@ using UnityEngine;
 public class QuitButton : MonoBehaviour
 {
  
+    //Quits application
+
     public void exitGame()
     {
         Application.Quit();

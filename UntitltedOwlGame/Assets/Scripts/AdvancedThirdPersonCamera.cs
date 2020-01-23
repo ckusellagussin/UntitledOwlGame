@@ -22,6 +22,7 @@ public class AdvancedThirdPersonCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //So Cursor is not shown
         Cursor.lockState = CursorLockMode.Locked;
 
         Cursor.visible = false;

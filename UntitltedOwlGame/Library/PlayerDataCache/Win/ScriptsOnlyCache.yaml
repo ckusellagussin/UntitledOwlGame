@@ -80,6 +80,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11038}
     - Class: 114
       Script: {instanceID: 11328}
+    - Class: 114
+      Script: {instanceID: 11348}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -702,4 +704,5 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Sandbox.unity
   - Assets/Scenes/3D_Flappybird.unity
-  playerPath: C:/Users/Casey/Documents/GitHub/UntitledOwlGame/UntitltedOwlGame/Build/UntitltedOwlGame.exe
+  playerPath: C:/Users/Casey/Documents/GitHub/UntitledOwlGame/UntitltedOwlGame/UntitledOwlGame
+    Build/UntitltedOwlGame.exe

@@ -53,6 +53,8 @@ public class ThirdPersonCharacterController : MonoBehaviour
     void OwlMovement()
     {
 
+        //Function is called only if Owl has enough energy to keep going
+
         if (energySystem.startEnergy <= 0)
         {
             return;
@@ -85,9 +87,11 @@ public class ThirdPersonCharacterController : MonoBehaviour
                 currentVelocity = currentVelocity - (decelerationRate * Time.deltaTime);
             }
 
-
+                //Clamped so Owl doesn't go faster than is intended
             currentVelocity = Mathf.Clamp(currentVelocity, initialVelocity, maxVelocity);
 
+
+               // S key slows Owl down if needed
             if (Input.GetKey("s"))
             {
                 rb.AddRelativeForce(0, 0, -currentVelocity * Time.deltaTime, ForceMode.VelocityChange);
@@ -101,6 +105,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
                 }
             }
 
+            //If right mouse button is held then Owl will face in target direction and keep doing so until it's let go
 
             if (Input.GetKey(KeyCode.Mouse1))
             {
@@ -112,10 +117,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
 
                 transform.localRotation = Quaternion.RotateTowards(bRotation, eRotation, eulrotation );
-
-
-              //  transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,
-                    //       Camera.main.transform.localEulerAngles.y, transform.localEulerAngles.z);
+            
 
 
             }
@@ -178,7 +180,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
         }
 
   
-
+    //Coroutines for when stun is nolonger in use
 
     }
 
