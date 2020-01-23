@@ -11,8 +11,8 @@ public class loadScene : MonoBehaviour
         SceneManager.LoadScene(sceneIndex,LoadSceneMode.Single);
         Time.timeScale = 1;
 
-      
-
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
     }
 
